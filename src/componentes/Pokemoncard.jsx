@@ -11,8 +11,7 @@ const PokemonCard = ({ pokemonData }) => {
    <h2>{pokemonData.name}</h2>
       <img src={pokemonData.sprites.front_default} alt={pokemonData.name} />
       <p>
-        TYPE:{" "}
-        {pokemonData.types.map((typePoke) => typePoke.type.name).join(" ")}
+        TYPE: {pokemonData.types.map((typePoke) => typePoke.type.name).join(" ")}
       </p>
     </div>
   );
