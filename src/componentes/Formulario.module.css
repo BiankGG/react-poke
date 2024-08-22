@@ -1,26 +1,95 @@
-.pokeinfo{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    gap: 10px;
-    color: rgb(120, 14, 86);
-    background-image: linear-gradient(to right, blueviolet, yellow);
-   
+.pokeinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; 
+  background: linear-gradient(to right, blueviolet, yellow); 
+  color: rgb(120, 14, 86);
+  text-align: center; 
+  padding: 20px; 
+  box-sizing: border-box; 
+}
 
+h1 {
+  font-size: 2.5rem; 
+  margin-bottom: 20px; 
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 10px; 
+}
+
+input {
+  font-size: 1.125rem; 
+  padding: 10px 15px; 
+  border-radius: 8px; 
+  border: 2px solid #ccc;
+  outline: none;
+  width: 100%; 
+  max-width: 400px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+}
+
+input:focus {
+  border-color: blueviolet; 
+  box-shadow: 0 0 8px rgba(0, 0, 255, 0.3); 
 }
 
 .infopoke {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    text-align: center;
-    background-color: white;
-   
-  }
-  input {
-    font-size: 18px;
-  }
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  text-align: center;
+  background-color: white;
+}
+
+.infopoke img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+p {
+  font-size: 1.125rem; 
+  margin-top: 10px; 
+}
+
+.pokeinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh; 
+  gap: 10px;
+  color: rgb(120, 14, 86);
+  background-image: linear-gradient(to right, blueviolet, yellow);
+  overflow-y: auto; 
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.pokemonList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+
+.infopoke {
+  max-width: 300px;
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}

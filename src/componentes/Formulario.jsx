@@ -5,30 +5,47 @@ import PokemonCard from "./Pokemoncard";
 
 function Formulario() {
   const [pokemonName, setPokemonName] = useState("");
-  const [pokemonData, setPokemonData] = useState(null);
+  const [pokemonData, setPokemonData] = useState([]);
+  const [filteredPokemons, setFilteredPokemons] = useState([]);
+
+
+  const fetchAllPokemons = async () => {
+    try {
+      const allPokemonURL = `https://pokeapi.co/api/v2/pokemon?limit=1000`;
+      const response = await axios.get(allPokemonURL);
+      return response.data.results;
+    } catch (error) {
+      console.error("Error fetching all Pokémon data:", error);
+      return [];
+    }
+  };
+
 
   useEffect(() => {
+    const fetchPokemons = async () => {
+      const allPokemons = await fetchAllPokemons();
+      setPokemonData(allPokemons);
+    };
+    fetchPokemons();
+  }, []);
+
+ 
+  useEffect(() => {
     if (!pokemonName) {
-      setPokemonData(null);
+      setFilteredPokemons([]);
       return;
     }
 
-    const fetchPoke = async () => {
-      try {
-        const pokemonURL = `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`;
-        const newPokemonData = await axios.get(pokemonURL);
-        setPokemonData(newPokemonData.data);
-      } catch (error) {
-        console.error("not getting pokemon");
-        setPokemonData(null);
-      }
-    };
-    fetchPoke();
-  }, [pokemonName]);
+    const filtered = pokemonData.filter((pokemon) =>
+      pokemon.name.startsWith(pokemonName.toLowerCase())
+    );
+    setFilteredPokemons(filtered);
+  }, [pokemonName, pokemonData]);
 
   const handleInputChange = (e) => {
     setPokemonName(e.target.value);
   };
+
   return (
     <div className={styles.pokeinfo}>
       <h1>Find Your Pokemon!</h1>
@@ -37,15 +54,24 @@ function Formulario() {
           type="text"
           value={pokemonName}
           onChange={handleInputChange}
-          
+          placeholder="Type Pokémon name..."
         />
       </form>
 
-      <PokemonCard pokemonData={pokemonData} />
+      <div className={styles.pokemonList}>
+        {filteredPokemons.length ? (
+          filteredPokemons.map((pokemon) => (
+            <PokemonCard
+              key={pokemon.name}
+              pokemonData={{ name: pokemon.name, url: pokemon.url }}
+            />
+          ))
+        ) : (
+          <p>No Pokémon found</p>
+        )}
+      </div>
 
-      {!pokemonData && pokemonName && <p>Pokemon not Found</p>}
-
-      {!pokemonName && <p>Enter pokemon</p>}
+      {!pokemonName && <p>Enter Pokémon name</p>}
     </div>
   );
 }
